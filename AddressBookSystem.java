@@ -19,7 +19,7 @@ public class AddressBookSystem {
         private final String mobileNumber;
         private final String pinCode;
 
-        PersonDetails(String personID,String firstName, String lastName, String emailAddress, String homeAddress, String cityName, String stateName, String mobileNumber, String pinCode) {
+        PersonDetails(String personID, String firstName, String lastName, String emailAddress, String homeAddress, String cityName, String stateName, String mobileNumber, String pinCode) {
 
             this.personID = personID;
             this.firstName = firstName;
@@ -42,10 +42,9 @@ public class AddressBookSystem {
         personDetails(contacts);
     }
 
-    // gets details of person and stores in array list
+    // adds details of person and stores in array list
     public static void personDetails(List<PersonDetails> contacts) {
 
-        int ADD_CONTACTS = 1;
 
         String pID = personID();
         String fName = firstName();
@@ -57,18 +56,32 @@ public class AddressBookSystem {
         String mNumber = mobileNumber();
         String pCode = pinCode();
 
-        // adding details in array list
-        contacts.add(new PersonDetails(pID,fName, lName, email, hAddress, city, state, mNumber, pCode));
+        // adding details in array list as one object
+        contacts.add(new PersonDetails(pID, fName, lName, email, hAddress, city, state, mNumber, pCode));
 
-        System.out.println("To add new contact press 1 or press 0 to stop adding");
+        startProcess(contacts);
+
+    }
+
+    // takes actions whether to add details or to edit or to stop
+    private static void startProcess(List<PersonDetails> contacts) {
+        int ADD_CONTACTS = 1;
+        int EDIT_CONTACTS = 2;
+
+        System.out.println("To add new contact press 1 ,press 2 to edit,or press 0 to stop adding");
         int userChoice = sc.nextInt();
 
         // recursively calling the function
-        if(userChoice == ADD_CONTACTS) {
+        if (userChoice == ADD_CONTACTS) {
             sc.nextLine();
             personDetails(contacts);
-        }
-        else{
+        } else if (userChoice == EDIT_CONTACTS) {
+            //calling editDetails method to edit details
+            sc.nextLine();
+            System.out.println("Enter the first name to edit:");
+            String name = sc.nextLine();
+            editDetails(name, contacts);
+        } else {
             System.out.println();
             System.out.println("The Person Details are as follows : ");
             System.out.println();
@@ -76,7 +89,7 @@ public class AddressBookSystem {
             // displaying info on console
             for (PersonDetails c : contacts) {
 
-                System.out.println("These are details of Person ID: "+c.personID);
+                System.out.println("These are details of Person ID: " + c.personID);
                 System.out.println("First Name : " + c.firstName);
                 System.out.println("Last Name : " + c.lastName);
                 System.out.println("Email Address : " + c.emailAddress);
@@ -90,7 +103,88 @@ public class AddressBookSystem {
             }
 
         }
+    }
 
+    // checks user entered details present in list if yes then calls method edit parameter to edit details
+    public static void editDetails(String name, List<PersonDetails> contacts) {
+
+        for (int i = 0; i < contacts.size(); i++) {
+            //checks if entered name matches first name of any person if yes then edit the persons details
+            if (name.contains(contacts.get(i).firstName)) {
+
+                editParameter(contacts, i);
+            }
+
+        }
+
+    }
+
+    // edits the parameters that user want to edit
+    private static void editParameter(List<PersonDetails> contacts, int i) {
+
+        // gets all details of that person and stores it
+        String perID = contacts.get(i).personID;
+        String fName = contacts.get(i).firstName;
+        String lName = contacts.get(i).lastName;
+        String mail = contacts.get(i).emailAddress;
+        String addr = contacts.get(i).homeAddress;
+        String cName = contacts.get(i).cityName;
+        String sName = contacts.get(i).stateName;
+        String mNO = contacts.get(i).mobileNumber;
+        String pCode = contacts.get(i).pinCode;
+
+
+        System.out.println("Which details you want to edit : ");
+        System.out.println(" Press 1 for first Name");
+        System.out.println(" Press 2 for last Name");
+        System.out.println(" Press 3 for email");
+        System.out.println(" Press 4 for home address");
+        System.out.println(" Press 5 for city");
+        System.out.println(" Press 6 for state");
+        System.out.println(" Press 7 for mobile number");
+        System.out.println(" Press 8 for pin code");
+        int editPara = sc.nextInt();
+        sc.nextLine();
+
+        switch (editPara) {
+            case 1:
+                System.out.println("Enter updated First Name :");
+                fName = sc.nextLine();
+                break;
+            case 2:
+                System.out.println("Enter updated Last Name :");
+                lName = sc.nextLine();
+                break;
+            case 3:
+                System.out.println("Enter updated Email Address :");
+                mail = sc.nextLine();
+                break;
+            case 4:
+                System.out.println("Enter updated Home Address :");
+                addr = sc.nextLine();
+                break;
+            case 5:
+                System.out.println("Enter updated City Name :");
+                cName = sc.nextLine();
+                break;
+            case 6:
+                System.out.println("Enter updated State Name :");
+                sName = sc.nextLine();
+                break;
+            case 7:
+                System.out.println("Enter updated Mobile Number :");
+                mNO = sc.nextLine();
+                break;
+            case 8:
+                System.out.println("Enter updated Pin Code :");
+                pCode = sc.nextLine();
+                break;
+
+        }
+
+        //updates the details of the persons
+        contacts.set(i, new PersonDetails(perID, fName, lName, mail, addr, cName, sName, mNO, pCode));
+        startProcess(contacts);
     }
 
     // this methods takes user input and returns String
