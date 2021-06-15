@@ -8,7 +8,8 @@ public class AddressBookSystem {
 
     // Creating Person Details Class
     public static class PersonDetails {
-        
+
+        private final String personID;
         private final String firstName;
         private final String lastName;
         private final String emailAddress;
@@ -18,7 +19,9 @@ public class AddressBookSystem {
         private final String mobileNumber;
         private final String pinCode;
 
-        PersonDetails(String firstName, String lastName, String emailAddress, String homeAddress, String cityName, String stateName, String mobileNumber, String pinCode) {
+        PersonDetails(String personID,String firstName, String lastName, String emailAddress, String homeAddress, String cityName, String stateName, String mobileNumber, String pinCode) {
+
+            this.personID = personID;
             this.firstName = firstName;
             this.lastName = lastName;
             this.emailAddress = emailAddress;
@@ -35,14 +38,16 @@ public class AddressBookSystem {
     public static void main(String[] args) {
 
         System.out.println("Welcome to Address Book Program !!! ");
-        personDetails();
+        List<PersonDetails> contacts = new ArrayList<>();
+        personDetails(contacts);
     }
 
     // gets details of person and stores in array list
-    public static void personDetails() {
+    public static void personDetails(List<PersonDetails> contacts) {
 
-        List<PersonDetails> contacts = new ArrayList<>();
+        int ADD_CONTACTS = 1;
 
+        String pID = personID();
         String fName = firstName();
         String lName = lastName();
         String email = email();
@@ -53,28 +58,47 @@ public class AddressBookSystem {
         String pCode = pinCode();
 
         // adding details in array list
-        contacts.add(new PersonDetails(fName, lName, email, hAddress, city, state, mNumber, pCode));
+        contacts.add(new PersonDetails(pID,fName, lName, email, hAddress, city, state, mNumber, pCode));
 
-        System.out.println();
-	System.out.println("The Person Details are as follows : ");
-	System.out.println();
+        System.out.println("To add new contact press 1 or press 0 to stop adding");
+        int userChoice = sc.nextInt();
 
-	// displaying info on console
-        for (PersonDetails c : contacts) {
+        // recursively calling the function
+        if(userChoice == ADD_CONTACTS) {
+            sc.nextLine();
+            personDetails(contacts);
+        }
+        else{
+            System.out.println();
+            System.out.println("The Person Details are as follows : ");
+            System.out.println();
 
-            System.out.println("First Name : " + c.firstName);
-            System.out.println("Last Name : " + c.lastName);
-            System.out.println("Email Address : " + c.emailAddress);
-            System.out.println("Home Address : " + c.homeAddress);
-            System.out.println("City : " + c.cityName);
-            System.out.println("State : " + c.stateName);
-            System.out.println("Mobile Number : " + c.mobileNumber);
-            System.out.println("Pin Code : " + c.pinCode);
+            // displaying info on console
+            for (PersonDetails c : contacts) {
+
+                System.out.println("These are details of Person ID: "+c.personID);
+                System.out.println("First Name : " + c.firstName);
+                System.out.println("Last Name : " + c.lastName);
+                System.out.println("Email Address : " + c.emailAddress);
+                System.out.println("Home Address : " + c.homeAddress);
+                System.out.println("City : " + c.cityName);
+                System.out.println("State : " + c.stateName);
+                System.out.println("Mobile Number : " + c.mobileNumber);
+                System.out.println("Pin Code : " + c.pinCode);
+                System.out.println();
+
+            }
 
         }
+
     }
 
     // this methods takes user input and returns String
+    public static String personID() {
+        System.out.println("Enter the Person ID : ");
+        return sc.nextLine();
+    }
+
     public static String firstName() {
         System.out.println("Enter the first name : ");
         return sc.nextLine();
