@@ -46,6 +46,7 @@ public class AddressBookSystem {
     public static void personDetails(List<PersonDetails> contacts) {
 
 
+        // calling methods to get user Input
         String pID = personID();
         String fName = firstName();
         String lName = lastName();
@@ -67,13 +68,16 @@ public class AddressBookSystem {
     private static void startProcess(List<PersonDetails> contacts) {
         int ADD_CONTACTS = 1;
         int EDIT_CONTACTS = 2;
+        int REMOVE_CONTACTS = 3;
+	int STOP_AND_DISPLAY = 0;
 
-        System.out.println("To add new contact press 1 ,press 2 to edit,or press 0 to stop adding");
+        System.out.println("To add new contact press 1 ,press 2 to edit, press 3 to delete details,or press 0 to stop adding and display");
         int userChoice = sc.nextInt();
+
 
         // recursively calling the function
         if (userChoice == ADD_CONTACTS) {
-            sc.nextLine();
+            sc.nextLine();               //---> to avoid enter button problem
             personDetails(contacts);
         } else if (userChoice == EDIT_CONTACTS) {
             //calling editDetails method to edit details
@@ -81,7 +85,13 @@ public class AddressBookSystem {
             System.out.println("Enter the first name to edit:");
             String name = sc.nextLine();
             editDetails(name, contacts);
-        } else {
+        } else if (userChoice == REMOVE_CONTACTS) {
+            //calling removeDetails method to delete details
+            sc.nextLine();
+            System.out.println("Enter the first name to delete the contact");
+            String name = sc.nextLine();
+            removeDetails(name,contacts);
+        } else if (userChoice == STOP_AND_DISPLAY){
             System.out.println();
             System.out.println("The Person Details are as follows : ");
             System.out.println();
@@ -102,7 +112,9 @@ public class AddressBookSystem {
 
             }
 
-        }
+        } else {
+		System.out.println("INVALID INPUT,Please enter Correct Input");
+	}
     }
 
     // checks user entered details present in list if yes then calls method edit parameter to edit details
@@ -116,6 +128,8 @@ public class AddressBookSystem {
             }
 
         }
+        System.out.println("No user found with that name , Please re-enter the Correct Name ");
+        startProcess(contacts);
 
     }
 
@@ -146,6 +160,7 @@ public class AddressBookSystem {
         int editPara = sc.nextInt();
         sc.nextLine();
 
+	//checks the condition and accordingly perform actions
         switch (editPara) {
             case 1:
                 System.out.println("Enter updated First Name :");
@@ -186,6 +201,20 @@ public class AddressBookSystem {
         contacts.set(i, new PersonDetails(perID, fName, lName, mail, addr, cName, sName, mNO, pCode));
         startProcess(contacts);
     }
+
+    // Deletes details of a person if first name is there inside a list else not
+    public static void removeDetails(String name, List<PersonDetails> contacts) {
+        for (int i = 0; i < contacts.size(); i++) {
+            //checks if entered name matches first name of any person if yes then edit the persons details
+            if (name.contains(contacts.get(i).firstName)) {
+
+                contacts.remove(i);
+            }
+
+        }
+        startProcess(contacts);
+    }
+
 
     // this methods takes user input and returns String
     public static String personID() {
@@ -233,3 +262,4 @@ public class AddressBookSystem {
         return sc.nextLine();
     }
 }
+
