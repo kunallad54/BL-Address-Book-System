@@ -1,3 +1,11 @@
+/**
+ * Creating Address Book in which it stores person's contact details
+ * It can add new contact,edit,delete the contact details
+ * 
+ * @author Krunal Lad
+ * @Since 15-06-2021
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
