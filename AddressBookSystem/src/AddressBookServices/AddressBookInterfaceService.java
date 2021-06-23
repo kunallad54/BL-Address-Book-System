@@ -1,10 +1,19 @@
 package AddressBookServices;
 
-import AddressBookModel.AddressBook;
+import AddressBookModel.ContactDetails;
 
 public interface AddressBookInterfaceService {
-    public  void addContactDetails(AddressBook addressBook, String companyName);
-    public void editContactDetails(String compName, String fName, String lName, String eMail, String hAddress, String cName, String sName, String mNumber, String pCode);
-    public void deleteContactDetails(String compName);
+
+    public ContactDetails readDataFromConsole(ContactDetails contactDetails);
+
+    public void addContactDetails(ContactDetails contactDetails, String personID);
+
+    public void editContactDetails(String personID);
+
+    public void deleteContactDetails(String personID);
+
     public void display();
+
+    public boolean findByID(String personID);
+
 }

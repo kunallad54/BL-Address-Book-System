@@ -6,11 +6,6 @@ public class UserInputOutput {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static String getCustomerPersonID(){
-        System.out.println("Enter the person ID : ");
-        return scanner.next();
-    }
-
     public static String getCustomerFirstName(){
         System.out.println("Enter the First Name : ");
         return scanner.next();

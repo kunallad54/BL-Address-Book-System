@@ -8,45 +8,77 @@ package AddressBookController;
  * @Since 20-06-2021
  */
 
-import AddressBookModel.AddressBook;
+import AddressBookModel.ContactDetails;
 import AddressBookServices.AddressBookServices;
+import DAO.AddressBook;
 import Util.UserInputOutput;
+
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMain {
 
-    static Scanner scanner = new Scanner(System.in);
+    HashMap<String, AddressBook> addressBookOfCompanies = new HashMap<String, AddressBook>();
 
     static AddressBookServices addressBookServices = new AddressBookServices();
 
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book System !!!");
         AddressBookMain addressBookMain = new AddressBookMain();
-        addressBookMain.setAddressBookForCompanies(addressBookMain);
-
+        int choice = 0;
+        while (choice != 3) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Press 1 - To create a new address book");
+            System.out.println("Press 2 - To access an existing address book");
+            System.out.println("Press 3 - To Exit");
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    addressBookMain.newAddressBook();
+                    break;
+                case 2:
+                    addressBookMain.accessAddressBook();
+                    break;
+                case 3:
+                    System.out.println("Exit!!!");
+                    break;
+                default:
+                    System.out.println("Enter Valid Choice");
+                    break;
+            }
+        }
     }
 
-    public void setAddressBookForCompanies(AddressBookMain addressBookMain){
-        AddressBook addressBook ;
+    public void addressBookForParticularCompany() {
+        ContactDetails addressBook;
         while (true) {
+            Scanner scanner = new Scanner(System.in);
             int choice = UserInputOutput.userChoice();
             switch (choice) {
                 case 1:
-                    System.out.println("Enter the company Name : ");
-                    String companyName = scanner.next();
-                    addressBook = readDataFromConsole();
-                    addressBookServices.addContactDetails(addressBook,companyName);
+                    System.out.println("Enter the Person Id : ");
+                    String personID = scanner.next();
+                    ContactDetails contactDetails = new ContactDetails();
+                    addressBook = addressBookServices.readDataFromConsole(contactDetails);
+                    addressBookServices.addContactDetails(addressBook, personID);
                     break;
                 case 2:
-                    System.out.println("Enter the company Name : ");
-                    String cName = scanner.next();
-                    addressBookMain.editParameters(cName);
+                    System.out.println("Enter the Person ID to edit details: ");
+                    personID = scanner.next();
+                    if (addressBookServices.findByID(personID)) {
+                        addressBookServices.editContactDetails(personID);
+                    } else {
+                        System.out.println("ID Not Found !!! \nEnter Valid Person ID");
+                    }
                     break;
                 case 3:
-                    System.out.println("Enter the company Name : ");
-                    String compName = scanner.next();
-                    addressBookServices.deleteContactDetails(compName);
-
+                    System.out.println("Enter the Person ID to delete contact details :");
+                    personID = scanner.next();
+                    if (addressBookServices.findByID(personID)) {
+                        addressBookServices.deleteContactDetails(personID);
+                    } else {
+                        System.out.println("ID Not Found !!! \nEnter Valid Person ID");
+                    }
                     break;
                 case 4:
                     addressBookServices.display();
@@ -55,56 +87,24 @@ public class AddressBookMain {
             if (choice == 5)
                 break;
         }
-
     }
 
-    // getting data from user and stores in object and returns the object
-    public static AddressBook readDataFromConsole() {
-
+    public void newAddressBook() {
+        Scanner scanner = new Scanner(System.in);
         AddressBook addressBook = new AddressBook();
-
-        String pID = UserInputOutput.getCustomerPersonID();
-        addressBook.setPersonID(pID);
-
-        String fName = UserInputOutput.getCustomerFirstName();
-        addressBook.setFirstName(fName);
-
-        String lName = UserInputOutput.getCustomerLastName();
-        addressBook.setLastName(lName);
-
-        String eMail = UserInputOutput.getCustomerEmailAddress();
-        addressBook.setEmailAddress(eMail);
-
-        String hAddress = UserInputOutput.getCustomerHomeAddress();
-        addressBook.setHomeAddress(hAddress);
-
-        String cName = UserInputOutput.getCustomerCityName();
-        addressBook.setCity(cName);
-
-        String sName = UserInputOutput.getCustomerStateName();
-        addressBook.setState(sName);
-
-        String mNUmber = UserInputOutput.getCustomerMobileNumber();
-        addressBook.setMobileNumber(mNUmber);
-
-        String pCode = UserInputOutput.getCustomerPinCode();
-        addressBook.setPinCode(pCode);
-
-        return addressBook;
+        System.out.println("Enter the name of new address book : ");
+        String companyName = scanner.nextLine();
+        addressBookOfCompanies.put(companyName, addressBook);
+        System.out.println("New Address Book for " + companyName + " successfully created !!! ");
     }
 
-    //getting data to edit parameters
-    public void editParameters(String compName) {
-
-        String fName = UserInputOutput.getCustomerFirstName();
-        String lName = UserInputOutput.getCustomerLastName();
-        String eMail = UserInputOutput.getCustomerEmailAddress();
-        String hAddress = UserInputOutput.getCustomerHomeAddress();
-        String cName = UserInputOutput.getCustomerCityName();
-        String sName = UserInputOutput.getCustomerStateName();
-        String mNumber = UserInputOutput.getCustomerMobileNumber();
-        String pCode = UserInputOutput.getCustomerPinCode();
-
-        addressBookServices.editContactDetails(compName, fName, lName, eMail, hAddress, cName, sName, mNumber, pCode);
+    public void accessAddressBook() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter tha name of the company : ");
+        String companyName = scanner.nextLine();
+        AddressBook addressBook = addressBookOfCompanies.get(companyName);
+        AddressBookMain addressBookMain = new AddressBookMain();
+        addressBookMain.addressBookForParticularCompany();
     }
+
 }
