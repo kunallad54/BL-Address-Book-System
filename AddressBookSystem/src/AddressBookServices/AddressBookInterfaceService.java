@@ -16,4 +16,8 @@ public interface AddressBookInterfaceService {
 
     public boolean findByID(String personID);
 
+    public void searchPersonsInCity(String cityName);
+
+    public void searchPersonsInState(String stateName);
+
 }

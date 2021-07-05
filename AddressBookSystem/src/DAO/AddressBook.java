@@ -1,3 +1,7 @@
+/**
+ * Purpose : To perform all operations of address book project and send results to service class
+ */
+
 package DAO;
 
 import AddressBookModel.ContactDetails;
@@ -6,7 +10,7 @@ import Util.UserInputOutput;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Scanner;
+
 
 public class AddressBook {
     HashMap<String, ContactDetails> addressBook = new HashMap<String, ContactDetails>();
@@ -89,7 +93,40 @@ public class AddressBook {
      */
     public void display() {
         System.out.println(addressBook);
-        Iterator<Map.Entry<String, ContactDetails>> itr = addressBook.entrySet().iterator();
+    }
+
+    /**
+     * Purpose : To get person details of same city ,multiple persons can be in same city
+     *
+     * @param cityName input from service class
+     */
+    public void searchPersonsInCity(String cityName){
+        Iterator<Map.Entry<String, ContactDetails>> iterator = addressBook.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, ContactDetails> entry = iterator.next();
+            if(entry.getValue().getCity().equals(cityName)){
+                System.out.println("\nPerson ID : "+entry.getKey());
+                System.out.println("Person Details : \n"+entry.getValue());
+            }
+        }
+        System.out.println("Successfully Searched whole Address Book");
+    }
+
+    /**
+     * Purpose : To get person details of same state,multiple persons can be in same state
+     *
+     * @param stateName input from service class
+     */
+    public void searchPersonsInState(String stateName){
+        Iterator<Map.Entry<String, ContactDetails>> iterator = addressBook.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, ContactDetails> entry = iterator.next();
+            if(entry.getValue().getCity().equals(stateName)){
+                System.out.println("\nPerson ID : "+entry.getKey());
+                System.out.println("Person Details : \n"+entry.getValue());
+            }
+        }
+        System.out.println("Successfully Searched whole Address Book");
     }
 
 }

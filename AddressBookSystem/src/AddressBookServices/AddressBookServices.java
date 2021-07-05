@@ -8,12 +8,6 @@ public class AddressBookServices implements AddressBookInterfaceService {
 
     AddressBook addressBook = new AddressBook();
 
-    /**
-     * Requesting from DOA AddressBook and returns it to Controller AddressBookMain
-     *
-     * @param contactDetails
-     * @return
-     */
     @Override
     public ContactDetails readDataFromConsole(ContactDetails contactDetails) {
         return addressBook.readDataFromConsole(contactDetails);
@@ -44,5 +38,14 @@ public class AddressBookServices implements AddressBookInterfaceService {
         return addressBook.findByID(personID);
     }
 
+    @Override
+    public void searchPersonsInCity(String cityName){
+        addressBook.searchPersonsInCity(cityName);
+    }
+
+    @Override
+    public void searchPersonsInState(String stateName){
+        addressBook.searchPersonsInState(stateName);
+    }
 
 }
