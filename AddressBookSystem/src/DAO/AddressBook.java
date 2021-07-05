@@ -101,14 +101,17 @@ public class AddressBook {
      * @param cityName input from service class
      */
     public void searchPersonsInCity(String cityName){
+        int count = 0;
         Iterator<Map.Entry<String, ContactDetails>> iterator = addressBook.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<String, ContactDetails> entry = iterator.next();
             if(entry.getValue().getCity().equals(cityName)){
+                count++;
                 System.out.println("\nPerson ID : \n"+entry.getKey());
                 System.out.println("Person Details : \n"+entry.getValue());
             }
         }
+        System.out.println("\nTotal Count of Persons from City "+cityName+" is : "+count);
         System.out.println("\nSuccessfully Searched whole Address Book\n");
     }
 
@@ -118,14 +121,17 @@ public class AddressBook {
      * @param stateName input from service class
      */
     public void searchPersonsInState(String stateName){
+        int count = 0;
         Iterator<Map.Entry<String, ContactDetails>> iterator = addressBook.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<String, ContactDetails> entry = iterator.next();
             if(entry.getValue().getState().equals(stateName)){
+                count++;
                 System.out.println("\nPerson ID : \n"+entry.getKey());
                 System.out.println("Person Details : \n"+entry.getValue());
             }
         }
+        System.out.println("\nTotal Count of Persons From State "+stateName+" is : "+count);
         System.out.println("\nSuccessfully Searched whole Address Book\n");
     }
 

@@ -7,6 +7,7 @@
  *               - Here We can add Person details,edit,delete,display for each company
  *               - Can search persons in same city or same State
  *               - Can view persons of same city or same state
+ *               - Can get the count of persons in same city or state
  *
  * @author Krunal Lad
  * @Since 05-07-2021
