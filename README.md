@@ -25,3 +25,7 @@
      to Address Book.
    - Use Collection Methods to Search Person by Name for Duplicate Entry
    - Override equals
+
+8. Ability to search Person in a City or State across the multiple AddressBook
+   - Search Result can show multiple person in the city or state
+
