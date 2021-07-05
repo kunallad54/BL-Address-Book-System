@@ -1,12 +1,14 @@
 package AddressBookController;
-/**
- * This Project Focuses on :
- * Refactor to add multiple Address Book to the System. Each Address Book
- * has a unique Name - Use Console to add new Address Book - Maintain Dictionary of Address Book Name to Address Book
+/**************************************************************************************************************
+ *
+ * Purpose : Ability to ensure there is no Duplicate Entry of the same Person in a particular Address Book
+ *           - Duplicate Check is done on Person Name while adding person to Address Book.
+ *            - Use Collection Methods to Search Person by Name for Duplicate Entry
  *
  * @author Krunal Lad
- * @Since 20-06-2021
- */
+ * @Since 05-07-2021
+ *
+ ****************************************************************************************************************/
 
 import AddressBookModel.ContactDetails;
 import AddressBookServices.AddressBookServices;
