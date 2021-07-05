@@ -6,6 +6,7 @@
  *               - Person ID is unique for each person ,which acts as key
  *               - Here We can add Person details,edit,delete,display for each company
  *               - Can search persons in same city or same State
+ *               - Can view persons of same city or same state
  *
  * @author Krunal Lad
  * @Since 05-07-2021
@@ -62,7 +63,8 @@ public class AddressBookMain {
      */
     public void addressBookForParticularCompany() {
         ContactDetails addressBook;
-        while (true) {
+        boolean flag = true;
+        while (flag) {
             Scanner scanner = new Scanner(System.in);
             int choice = UserInputOutput.userChoice();
             switch (choice) {
@@ -123,16 +125,17 @@ public class AddressBookMain {
                     }
                     break;
 
+                case 6 :
+                    System.out.println("Exited !!!");
+                    flag = false;
+                    break;
+
                 default:
                     System.out.println("Enter Valid Choice ");
                     break;
 
             }
 
-            if (choice == 6){
-                System.out.println("Exited !!!");
-                break;
-            }
         }
     }
 

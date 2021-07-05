@@ -105,11 +105,11 @@ public class AddressBook {
         while (iterator.hasNext()){
             Map.Entry<String, ContactDetails> entry = iterator.next();
             if(entry.getValue().getCity().equals(cityName)){
-                System.out.println("\nPerson ID : "+entry.getKey());
+                System.out.println("\nPerson ID : \n"+entry.getKey());
                 System.out.println("Person Details : \n"+entry.getValue());
             }
         }
-        System.out.println("Successfully Searched whole Address Book");
+        System.out.println("\nSuccessfully Searched whole Address Book\n");
     }
 
     /**
@@ -121,12 +121,12 @@ public class AddressBook {
         Iterator<Map.Entry<String, ContactDetails>> iterator = addressBook.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<String, ContactDetails> entry = iterator.next();
-            if(entry.getValue().getCity().equals(stateName)){
-                System.out.println("\nPerson ID : "+entry.getKey());
+            if(entry.getValue().getState().equals(stateName)){
+                System.out.println("\nPerson ID : \n"+entry.getKey());
                 System.out.println("Person Details : \n"+entry.getValue());
             }
         }
-        System.out.println("Successfully Searched whole Address Book");
+        System.out.println("\nSuccessfully Searched whole Address Book\n");
     }
 
 }
