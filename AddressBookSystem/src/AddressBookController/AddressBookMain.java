@@ -47,6 +47,8 @@ public class AddressBookMain {
                     break;
             }
         }
+        //addressBookMain.addressBookForParticularCompany();
+
     }
 
     public void addressBookForParticularCompany() {
@@ -59,8 +61,15 @@ public class AddressBookMain {
                     System.out.println("Enter the Person Id : ");
                     String personID = scanner.next();
                     ContactDetails contactDetails = new ContactDetails();
-                    addressBook = addressBookServices.readDataFromConsole(contactDetails);
-                    addressBookServices.addContactDetails(addressBook, personID);
+
+                    // checking for duplicate entries while entering the ID itself
+                    // as Id needs to unique it cant be duplicate
+                    if(addressBookServices.findByID(personID)){
+                        System.out.println("Id is already present");
+                    } else {
+                        addressBook = addressBookServices.readDataFromConsole(contactDetails);
+                        addressBookServices.addContactDetails(addressBook, personID);
+                    }
                     break;
                 case 2:
                     System.out.println("Enter the Person ID to edit details: ");
