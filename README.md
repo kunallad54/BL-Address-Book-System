@@ -19,6 +19,8 @@
 6. Refactor to add multiple Address book to the system.
    Each Address Book has unique Name
 
+## Using Java Streams : 
+
 7. Ability to ensure there is no Duplicate Entry of the same Person
    in a particular Address Book
    - Duplicate Check is done on Person Name while adding person
@@ -35,3 +37,6 @@
 
 10. Ability to get number of contact persons i.e. count by City or State
     - Search Result will show count by city and by state
+
+11. Ability to sort the entries in the address book alphabetically by
+    Person’s name
