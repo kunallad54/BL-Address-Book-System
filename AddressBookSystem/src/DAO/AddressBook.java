@@ -248,6 +248,8 @@ public class AddressBook {
 
     /**
      * Purpose : To get person details of same city or state ,multiple persons can be in same city or state
+     *
+     * @Since 05-07-2021
      */
     public void searchPersons() {
         Hashtable<String, Hashtable<String, ArrayList<String>>> hSearch = new Hashtable<>();
@@ -303,7 +305,18 @@ public class AddressBook {
         System.out.println("\nNumber of contact persons i.e. count by City or State is : " +count +"\n");
     }
 
-
+    /**
+     * Purpose : Ability to sort the entries in the address book alphabetically by
+     *           Person’s name
+     *
+     * @Since 06-07-2021
+     */
+    public void sortPersonsData(){
+        contactInfo.keySet().forEach(entry -> {
+            List<ContactDetails> data = contactInfo.get(entry).stream().sorted(Comparator.comparing(ContactDetails::getFirstName)).collect(Collectors.toList());
+            System.out.println(data);
+        });
+    }
 
 }
 

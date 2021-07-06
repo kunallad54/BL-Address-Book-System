@@ -36,5 +36,10 @@ public class AddressBookServices implements AddressBookInterfaceService {
         addressBook.searchPersons();
     }
 
+    @Override
+    public void sortPersonsData(){
+        addressBook.sortPersonsData();
+    }
+
 
 }

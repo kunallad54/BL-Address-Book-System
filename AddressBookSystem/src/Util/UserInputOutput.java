@@ -52,7 +52,8 @@ public class UserInputOutput {
         System.out.println("Press 3 - Delete Contact Details ");
         System.out.println("Press 4 - Display Contact Details ");
         System.out.println("Press 5 - Search Persons by City or State Name ");
-        System.out.println("Press 6 - Exit !!! ");
+        System.out.println("Press 6 - Sort Person Data ");
+        System.out.println("Press 7 - Exit !!! ");
 
         return scanner.nextInt();
     }

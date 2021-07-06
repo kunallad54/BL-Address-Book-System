@@ -18,5 +18,6 @@ public interface AddressBookInterfaceService {
 
     void searchPersons();
 
-    public void sortPersonsData();
+
+
 }
