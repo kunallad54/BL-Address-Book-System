@@ -164,7 +164,7 @@ public class AddressBook {
                         value.get(j).setState(input.next());
                         break;
                     case 5:
-                        System.out.println("Enter new Zip: ");
+                        System.out.println("Enter new Pin Code: ");
                         value.get(j).setPinCode(input.next());
                         break;
                     case 6:
@@ -307,15 +307,50 @@ public class AddressBook {
 
     /**
      * Purpose : Ability to sort the entries in the address book alphabetically by
-     *           Person’s name
+     *           - Person’s name
+     *           - City Name
+     *           - State Name
+     *           - Pin Code
      *
      * @Since 06-07-2021
      */
     public void sortPersonsData(){
-        contactInfo.keySet().forEach(entry -> {
-            List<ContactDetails> data = contactInfo.get(entry).stream().sorted(Comparator.comparing(ContactDetails::getFirstName)).collect(Collectors.toList());
-            System.out.println(data);
-        });
+        System.out.println("Press 1 to sort person by First Name");
+        System.out.println("Press 2 to sort person by City");
+        System.out.println("Press 3 to sort person by State");
+        System.out.println("Press 4 to sort person by Pin Code");
+        int choice = input.nextInt();
+
+        switch(choice) {
+            case 1:
+                System.out.println("\nSorting Address Book based on First Name");
+                contactInfo.keySet().forEach(entry -> {
+                    List<ContactDetails> data = contactInfo.get(entry).stream().sorted(Comparator.comparing(ContactDetails::getFirstName)).collect(Collectors.toList());
+                    System.out.println(data);
+                });
+                break;
+            case 2:
+                System.out.println("\nSorting Address Book based on City");
+                contactInfo.keySet().forEach(entry -> {
+                    List<ContactDetails> data = contactInfo.get(entry).stream().sorted(Comparator.comparing(ContactDetails::getCity)).collect(Collectors.toList());
+                    System.out.println(data);
+                });
+                break;
+            case 3:
+                System.out.println("\nSorting Address Book based on State");
+                contactInfo.keySet().forEach(entry -> {
+                    List<ContactDetails> data = contactInfo.get(entry).stream().sorted(Comparator.comparing(ContactDetails::getState)).collect(Collectors.toList());
+                    System.out.println(data);
+                });
+                break;
+            case 4:
+                System.out.println("\nSorting Address Book based on PinCode");
+                contactInfo.keySet().forEach(entry -> {
+                    List<ContactDetails> data = contactInfo.get(entry).stream().sorted(Comparator.comparing(ContactDetails::getPinCode)).collect(Collectors.toList());
+                    System.out.println(data);
+                });
+                break;
+        }
     }
 
 }

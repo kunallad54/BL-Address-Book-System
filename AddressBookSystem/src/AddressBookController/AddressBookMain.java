@@ -10,9 +10,12 @@
  *               - Can get the count of persons in same city or state
  *               - Ability to sort the entries in the address book alphabetically by
  *                 Person’s name
+ *               - Ability to sort the entries in the address book by City,
+ *                 State, or Pin code
+ *
  *
  * @author Krunal Lad
- * @Since 05-07-2021
+ * @Since 06-07-2021
  *
  ***************************************************************************************************/
 
