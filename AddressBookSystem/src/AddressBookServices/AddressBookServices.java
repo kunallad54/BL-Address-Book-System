@@ -3,49 +3,38 @@ package AddressBookServices;
 import AddressBookModel.ContactDetails;
 import DAO.AddressBook;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 // this class takes request from controller and sends it to DOA
 public class AddressBookServices implements AddressBookInterfaceService {
 
     AddressBook addressBook = new AddressBook();
 
     @Override
-    public ContactDetails readDataFromConsole(ContactDetails contactDetails) {
-        return addressBook.readDataFromConsole(contactDetails);
+    public Hashtable<String, ArrayList<ContactDetails>> addContactDetails() {
+        return addressBook.addContactDetails();
     }
 
     @Override
-    public void addContactDetails(ContactDetails contactDetails, String personID) {
-        addressBook.addContactDetails(contactDetails, personID);
+    public void editContactDetails(String addressBookName,Hashtable<String,ArrayList<ContactDetails>> contactInfo) {
+        addressBook.editContactDetails(addressBookName,contactInfo);
     }
 
     @Override
-    public void editContactDetails(String personID) {
-        addressBook.editContactDetails(personID);
+    public void deleteContactDetails(String addressBookName,Hashtable<String,ArrayList<ContactDetails>>contactInfo) {
+        addressBook.deleteContactDetails(addressBookName,contactInfo);
     }
 
     @Override
-    public void deleteContactDetails(String personID) {
-        addressBook.deleteContactDetails(personID);
+    public void display(Hashtable<String,ArrayList<ContactDetails>>contactInfo) {
+        addressBook.display(contactInfo);
     }
 
     @Override
-    public void display() {
-        addressBook.display();
+    public void searchPersons(){
+        addressBook.searchPersons();
     }
 
-    @Override
-    public boolean findByID(String personID) {
-        return addressBook.findByID(personID);
-    }
-
-    @Override
-    public void searchPersonsInCity(String cityName){
-        addressBook.searchPersonsInCity(cityName);
-    }
-
-    @Override
-    public void searchPersonsInState(String stateName){
-        addressBook.searchPersonsInState(stateName);
-    }
 
 }

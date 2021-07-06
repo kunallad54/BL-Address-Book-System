@@ -2,22 +2,22 @@ package AddressBookServices;
 
 import AddressBookModel.ContactDetails;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 public interface AddressBookInterfaceService {
 
-    public ContactDetails readDataFromConsole(ContactDetails contactDetails);
 
-    public void addContactDetails(ContactDetails contactDetails, String personID);
+    Hashtable<String, ArrayList<ContactDetails>> addContactDetails();
 
-    public void editContactDetails(String personID);
+    void editContactDetails(String addressBookName,Hashtable<String,ArrayList<ContactDetails>> contactInfo);
 
-    public void deleteContactDetails(String personID);
+    void deleteContactDetails(String addressBookName,Hashtable<String,ArrayList<ContactDetails>>contactInfo);
 
-    public void display();
+    void display(Hashtable<String,ArrayList<ContactDetails>>contactInfo);
 
-    public boolean findByID(String personID);
+    void searchPersons();
 
-    public void searchPersonsInCity(String cityName);
 
-    public void searchPersonsInState(String stateName);
 
 }
