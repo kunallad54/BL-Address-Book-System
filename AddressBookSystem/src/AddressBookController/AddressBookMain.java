@@ -12,15 +12,18 @@
  *                 Person’s name
  *               - Ability to sort the entries in the address book by City,
  *                 State, or Pin code
+ *               - Ability to Read or Write the Address Book with
+ *                 Persons Contact into a File using File IO
  *
  *
  * @author Krunal Lad
- * @Since 06-07-2021
+ * @Since 09-07-2021
  *
  ***************************************************************************************************/
 
 package AddressBookController;
 
+import AddressBookFileOperations.FileReaderWriter;
 import AddressBookModel.ContactDetails;
 import AddressBookServices.AddressBookServices;
 import Util.UserInputOutput;
@@ -34,17 +37,24 @@ public class AddressBookMain {
     static AddressBookServices addressBookServices = new AddressBookServices();
     static Scanner input = new Scanner(System.in);
 
-    public static void main(String args[]){
+    /**
+     * Purpose : Main Method perform all address book operations
+     */
+    public static void main(String args[]) {
         Hashtable<String, ArrayList<ContactDetails>> contactInfo = new Hashtable<>();
+        FileReaderWriter fileReaderWriter = new FileReaderWriter();
+
+        String filePath = "C:\\Users\\Kunal\\IdeaProjects\\AddressBookSystem\\src\\Files\\AddressBookData";
 
         boolean flag = true;
         int option;
-        while(flag) {
+        while (flag) {
             option = UserInputOutput.userChoice();
             switch (option) {
                 case 1:
                     System.out.println("\n" + "Add a new Address Book\n");
                     contactInfo = addressBookServices.addContactDetails();
+                    fileReaderWriter.writeData(filePath, contactInfo);
                     break;
                 case 2:
                     System.out.print("\n" + "Enter the name of the Address Book that you want to replace: \n");
@@ -58,7 +68,8 @@ public class AddressBookMain {
                     break;
                 case 4:
                     System.out.println("\n" + "Display all contacts in the Address Book\n");
-                    addressBookServices.display(contactInfo);
+                    //addressBookServices.display(contactInfo);
+                    fileReaderWriter.readData(filePath);
                     break;
                 case 5:
                     System.out.println("\n" + "Search Address Book based on City\n");
@@ -66,7 +77,7 @@ public class AddressBookMain {
                     flag = true;
                     break;
                 case 6:
-                    System.out.println("\n"+"Sort Data in Address Book\n");
+                    System.out.println("\n" + "Sort Data in Address Book\n");
                     addressBookServices.sortPersonsData();
                     break;
 
