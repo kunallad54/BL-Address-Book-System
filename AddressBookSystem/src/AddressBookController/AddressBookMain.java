@@ -23,10 +23,12 @@
 
 package AddressBookController;
 
+import AddressBookFileOperations.CSVFileReadWriter;
 import AddressBookFileOperations.FileReaderWriter;
 import AddressBookModel.ContactDetails;
 import AddressBookServices.AddressBookServices;
 import Util.UserInputOutput;
+import com.opencsv.CSVWriter;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -43,8 +45,9 @@ public class AddressBookMain {
     public static void main(String args[]) {
         Hashtable<String, ArrayList<ContactDetails>> contactInfo = new Hashtable<>();
         FileReaderWriter fileReaderWriter = new FileReaderWriter();
+        CSVFileReadWriter csvFileReadWriter = new CSVFileReadWriter();
 
-        String filePath = "C:\\Users\\Kunal\\IdeaProjects\\AddressBookSystem\\src\\Files\\AddressBookData";
+        String filePath = "C:\\Users\\Kunal\\IdeaProjects\\AddressBookSystem\\src\\Files\\AddressBookDataInCSV";
 
         boolean flag = true;
         int option;
@@ -55,6 +58,7 @@ public class AddressBookMain {
                     System.out.println("\n" + "Add a new Address Book\n");
                     contactInfo = addressBookServices.addContactDetails();
                     fileReaderWriter.writeData(filePath, contactInfo);
+                    csvFileReadWriter.writeCSVFile(contactInfo);
                     break;
                 case 2:
                     System.out.print("\n" + "Enter the name of the Address Book that you want to replace: \n");
@@ -69,7 +73,8 @@ public class AddressBookMain {
                 case 4:
                     System.out.println("\n" + "Display all contacts in the Address Book\n");
                     //addressBookServices.display(contactInfo);
-                    fileReaderWriter.readData(filePath);
+                    //fileReaderWriter.readData(filePath);
+                    csvFileReadWriter.readCSVFile();
                     break;
                 case 5:
                     System.out.println("\n" + "Search Address Book based on City\n");
