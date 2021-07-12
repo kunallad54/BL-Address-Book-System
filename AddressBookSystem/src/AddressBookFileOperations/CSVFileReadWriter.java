@@ -1,3 +1,6 @@
+/**
+ * Purpose : To read and write in CSV File
+ */
 package AddressBookFileOperations;
 
 import AddressBookModel.ContactDetails;
@@ -11,12 +14,22 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public class CSVFileReadWriter {
+
     String filePath = "C:\\Users\\Kunal\\IdeaProjects\\AddressBookSystem\\src\\Files\\";
 
+    /**
+     * Purpose : To write data into CSV File using OPEN CSV Library
+     *
+     * @param contactInfo
+     */
     public void writeCSVFile(Hashtable<String, ArrayList<ContactDetails>> contactInfo){
+
         contactInfo.keySet().stream().forEach(companyName ->{
+
             File file = new File(filePath + companyName + ".csv" );
+
             try {
+
                 FileWriter fileWriter = new FileWriter(file);
                 CSVWriter csvWriter = new CSVWriter(fileWriter);
 
@@ -26,11 +39,13 @@ public class CSVFileReadWriter {
 
                 //Add data to csv
                 contactInfo.get(companyName).stream().forEach(contactDetails -> {
+
                     String[] contact = {contactDetails.getFirstName(),contactDetails.getLastName()
                     ,contactDetails.getEmailAddress(),contactDetails.getHomeAddress(),contactDetails.getCity(),
                     contactDetails.getState(),contactDetails.getMobileNumber(),contactDetails.getPinCode()};
 
                     csvWriter.writeNext(contact);
+
                 });
 
                 csvWriter.close();
@@ -42,7 +57,11 @@ public class CSVFileReadWriter {
         });
     }
 
+    /**
+     * Purpose : TO read data from CSV File
+     */
     public void readCSVFile(){
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n\nReading CSV File...");
         System.out.println("Enter the Company Name : ");
@@ -51,6 +70,7 @@ public class CSVFileReadWriter {
         String filePathReader = filePath + companyName + ".csv";
 
         try {
+
             FileReader fileReader = new FileReader(filePathReader);
             CSVReader csvReader = new CSVReader(fileReader);
 
@@ -58,17 +78,27 @@ public class CSVFileReadWriter {
 
             //Reading Data
             while ((records = csvReader.readNext()) != null){
+
                 for (String lines : records){
+
                     System.out.print(lines + " \t");
+
                 }
                 System.out.println();
             }
+
         } catch (FileNotFoundException e) {
+
             e.printStackTrace();
+
         } catch (CsvValidationException e) {
+
             e.printStackTrace();
+
         } catch (IOException e) {
+
             e.printStackTrace();
+
         }
 
     }
